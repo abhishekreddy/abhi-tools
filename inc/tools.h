@@ -28,6 +28,7 @@ struct NODE {
 
 void insertToArray(int* arr, int data, int pos, int size);
 void insertion_sort(int* a, int size);
+void selection_sort(int* a, int size);
 
 //Linked List Functions
 struct NODE* initializeList();

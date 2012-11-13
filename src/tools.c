@@ -45,6 +45,25 @@ void insertion_sort(int* a, int size)
 
 }
 
+void selection_sort(int* a, int size)
+{
+	int key, i=0, j;
+	
+	for(j = 0 ; j < size; j++)
+	{
+		key = *(a+j);
+		for(i = j; i < size; i++)
+		{
+			if(key > *(a+i))
+			{
+				*(a+j) = *(a+i);
+				*(a+i) = key;
+				key = *(a+j);
+			}
+		}
+	}
+}
+
 /*Linked List Implementations*/
 void displayList(struct NODE* HEAD)
 {
