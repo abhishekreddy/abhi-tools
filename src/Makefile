@@ -1,18 +1,26 @@
 CC=gcc
-CFLAGS=-c -Wall -I./../inc/
-LDFLAGS=
-SOURCES=tools.c example.c
+CFLAGS=-c -Wall -I./../inc/ -fPIC -g
+LDFLAGS=-shared
+SOURCES=tools.c
 OBJECTS=$(SOURCES:.c=.o)
-EXECUTABLE=test
+TARGET=libabhitools.so
+OBJDIR=../out
+OBJ=$(addprefix $(OBJDIR)/, $(patsubst %.c, %.o, $(wildcard *.c)))
 
-all: $(SOURCES) $(EXECUTABLE)
-	
-$(EXECUTABLE): $(OBJECTS) 
-	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+.PHONY: all clean
 
-.c.o:
+all: $(OBJDIR) $(TARGET)
+
+$(OBJDIR):
+	mkdir $(OBJDIR)
+
+$(OBJDIR)/%.o: %.c
 	$(CC) $(CFLAGS) $< -o $@
 
+$(TARGET): $(OBJ) 
+	$(CC) $(LDFLAGS) -o $(OBJDIR)/$@ $^
+
 clean:
-	-rm -f *.o
-	-rm -f test
+	-rm -f $(TARGET) $(wildcard *.o)
+	-rm -rf $(OBJDIR)
+
