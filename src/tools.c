@@ -47,19 +47,24 @@ void insertion_sort(int* a, int size)
 
 void selection_sort(int* a, int size)
 {
-	int key, i=0, j;
+	int key, i=0, j, min;
 	
-	for(j = 0 ; j < size; j++)
+	for(j = 0 ; j < size - 1; j++)
 	{
 		key = *(a+j);
+		min = j;
 		for(i = j; i < size; i++)
 		{
 			if(key > *(a+i))
 			{
-				*(a+j) = *(a+i);
-				*(a+i) = key;
-				key = *(a+j);
+				key = *(a+i);
+				min = i;
 			}
+		}
+		if(j != min)
+		{
+			*(a+min) = *(a+j);
+			*(a+j) = key;
 		}
 	}
 }
@@ -272,3 +277,4 @@ struct NODE* initializeList()
 	HEAD->next = NULL;
 	return HEAD;
 }
+
