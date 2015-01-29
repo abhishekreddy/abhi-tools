@@ -3,7 +3,7 @@
  *
  * Some basic tools for c 
  *
- * Copyright (C) 2012 Abhishek Reddy kondaveeti
+ * Copyright (C) 2014-15 Abhishek Reddy kondaveeti
  *
  * Contributor: Abhishek Reddy Kondaveeti <abhishek.kondaveeti@gmail.com>
  *              
