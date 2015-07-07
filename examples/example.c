@@ -24,8 +24,8 @@ int main()
 	//	printf("%d\t", a[i]);
 	//}
 	//return 0;
-	struct NODE* llist = NULL;
-	llist = initializeList();
+	struct DNODE* llist = NULL;
+	llist = initializeDList();
 	int choice = 0, data = 0, pos = 0;
 	while(1) {
 		printf("Please choose the operation do you want to do on list\n");
@@ -43,40 +43,40 @@ int main()
 		case 1:
 			printf("Enter the data to add\n");
 			scanf("%d", &data);
-			addToList(llist, data);
+			addToDList(llist, data);
 			break;
 		case 2:
-			deleteFromList(llist);
+			deleteFromDList(llist);
 			break;
 		case 4:
 			printf("Enter the position\n");
 			scanf("%d", &pos);
 			printf("Enter the data\n");
 			scanf("%d", &data);
-			addToListAtPosition(llist, pos, data);
+			addToDListAtPosition(llist, pos, data);
 			break;
 		case 5:
 			printf("Enter the position\n");
 			scanf("%d", &pos);
-			deleteFromGivenAtPosition(llist, pos);
+			deleteFromDListAtPosition(llist, pos);
 			break;
 		case 6:
 			printf("Enter the position\n");
 			scanf("%d", &pos);
 			printf("Enter the data\n");
 			scanf("%d", &data);
-			modifyListAtPosition(llist, pos, data);
+			modifyDListAtPosition(llist, pos, data);
 			break;
 		case 7:
 			printf("Enter the position\n");
 			scanf("%d", &pos);
-			displayListAtPosition(llist, pos);
+			displayDListAtPosition(llist, pos);
 			break;
 		case 8:
 			return 0;
 		case 3:
 		default:
-			displayList(llist);
+			displayDList(llist);
 			break;
 		}
 	}

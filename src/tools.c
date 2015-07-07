@@ -1,12 +1,12 @@
 /*
  * tools.c
  *
- * Some basic tools for c 
+ * Some basic tools for c
  *
  * Copyright (C) 2014-15 Abhishek Reddy kondaveeti
  *
  * Contributor: Abhishek Reddy Kondaveeti <abhishek.kondaveeti@gmail.com>
- *              
+ *
  *
  * This file is licensed under the terms of the GNU General Public License
  * version 2. This program is licensed "as is" without any warranty of any
@@ -31,7 +31,7 @@ void insertion_sort(int* a, int size)
 {
 	int key, i=0, j;
 
-	for(j = 1 ; j < size; j++) 
+	for(j = 1 ; j < size; j++)
 	{
 		key = *(a+j);
 		i = j-1;
@@ -48,7 +48,7 @@ void insertion_sort(int* a, int size)
 void selection_sort(int* a, int size)
 {
 	int key, i=0, j, min;
-	
+
 	for(j = 0 ; j < size - 1; j++)
 	{
 		key = *(a+j);
@@ -73,12 +73,12 @@ void selection_sort(int* a, int size)
 void displayList(struct NODE* HEAD)
 {
 	struct NODE *node = HEAD;
-	
+
 	if(node == NULL)
 	{
 		printf("Invalid NODE\n");
 	}
-	
+
 	if(node->next != NULL)
 	{
 		node = node->next;
@@ -88,7 +88,7 @@ void displayList(struct NODE* HEAD)
 		printf("No elements in Array\n");
 		return;
 	}
-	
+
 
 	while(node->next != NULL) {
 		printf("%d\t", node->data);
@@ -97,15 +97,15 @@ void displayList(struct NODE* HEAD)
 	printf("%d\n", node->data);
 }
 
-void deleteFromList(struct NODE* HEAD) 
+void deleteFromList(struct NODE* HEAD)
 {
 	struct NODE *node = HEAD;
-	
+
 	if(node == NULL)
 	{
 		printf("Invalid NODE\n");
 	}
-	
+
 	if(node->next == NULL)
 	{
 		printf("No elements left in List\n");
@@ -118,15 +118,15 @@ void deleteFromList(struct NODE* HEAD)
 	node->next = NULL;
 }
 
-void addToList(struct NODE* HEAD, int data) 
+void addToList(struct NODE* HEAD, int data)
 {
 	struct NODE *node = HEAD, *nnode;
-	
+
 	if(node == NULL)
 	{
 		printf("Invalid NODE\n");
 	}
-	
+
 	while(node->next != NULL) {
 		node = node->next;
 	}
@@ -136,22 +136,22 @@ void addToList(struct NODE* HEAD, int data)
 	nnode->next = NULL;
 }
 
-void deleteFromGivenAtPosition(struct NODE* HEAD, int pos)
+void deleteFromListAtPosition(struct NODE* HEAD, int pos)
 {
 	struct NODE *node = HEAD, *dnode;
 	int count = 0;
-	
+
 	if(node == NULL)
 	{
 		printf("Invalid NODE\n");
 	}
-	
+
 	if(pos < 0)
 	{
 		printf("Invalid Position\n");
 		return;
 	}
-	
+
 	while(node->next != NULL) {
 		if(count == (pos - 1))
 			break;
@@ -169,22 +169,22 @@ void deleteFromGivenAtPosition(struct NODE* HEAD, int pos)
 	free(dnode);
 }
 
-void addToListAtPosition(struct NODE* HEAD, int pos, int data) 
+void addToListAtPosition(struct NODE* HEAD, int pos, int data)
 {
 	struct NODE *node = HEAD, *nnode;
 	int count = 0;
-	
+
 	if(node == NULL)
 	{
 		printf("Invalid NODE\n");
 	}
-	
+
 	if(pos < 0)
 	{
 		printf("Invalid Position\n");
 		return;
 	}
-	
+
 	while(node->next != NULL) {
 		if(count == (pos - 1))
 			break;
@@ -204,22 +204,22 @@ void addToListAtPosition(struct NODE* HEAD, int pos, int data)
 	nnode->data = data;
 }
 
-void modifyListAtPosition(struct NODE* HEAD, int pos, int data) 
+void modifyListAtPosition(struct NODE* HEAD, int pos, int data)
 {
 	struct NODE *node = HEAD;
 	int count = 0;
-	
+
 	if(node == NULL)
 	{
 		printf("Invalid NODE\n");
 	}
-	
+
 	if(pos < 0)
 	{
 		printf("Invalid Position\n");
 		return;
 	}
-	
+
 	while(node->next != NULL) {
 		if(count == pos)
 			break;
@@ -235,22 +235,22 @@ void modifyListAtPosition(struct NODE* HEAD, int pos, int data)
 	node->data = data;
 }
 
-void displayListAtPosition(struct NODE* HEAD, int pos) 
+void displayListAtPosition(struct NODE* HEAD, int pos)
 {
 	struct NODE *node = HEAD;
 	int count = 0;
-	
+
 	if(node == NULL)
 	{
 		printf("Invalid NODE\n");
 	}
-	
+
 	if(pos < 0)
 	{
 		printf("Invalid Position\n");
 		return;
 	}
-	
+
 	while(node->next != NULL) {
 		if(count == pos)
 			break;
@@ -278,3 +278,214 @@ struct NODE* initializeList()
 	return HEAD;
 }
 
+void displayDList(struct DNODE* HEAD)
+{
+	struct DNODE *node = HEAD;
+
+	if(node == NULL)
+	{
+		printf("Invalid NODE\n");
+	}
+
+	if(node->next != NULL)
+	{
+		node = node->next;
+	}
+	else
+	{
+		printf("No elements in Array\n");
+		return;
+	}
+
+
+	while(node->next != NULL) {
+		printf("%d\t", node->data);
+		node = node->next;
+		}
+	printf("%d\n", node->data);
+}
+
+void displayDListAtPosition(struct DNODE* HEAD, int pos)
+{
+	struct DNODE *node = HEAD;
+	int count = 0;
+
+	if(node == NULL)
+	{
+		printf("Invalid NODE\n");
+	}
+
+	if(pos < 0)
+	{
+		printf("Invalid Position\n");
+		return;
+	}
+
+	while(node->next != NULL) {
+		if(count == pos)
+			break;
+		count++;
+		node = node->next;
+	}
+
+	if(count < pos)
+	{
+		printf("Invalid Position\n");
+		return;
+	}
+	printf("%d\n", node->data);
+}
+
+void addToDList(struct DNODE* HEAD, int data)
+{
+	struct DNODE *node = HEAD, *nnode;
+
+	if(node == NULL)
+	{
+		printf("Invalid NODE\n");
+	}
+
+	while(node->next != NULL) {
+		node = node->next;
+	}
+	nnode = (struct DNODE*)malloc(sizeof(struct DNODE));
+	node->next = nnode;
+	nnode->data = data;
+    nnode->prev = node;
+	nnode->next = NULL;
+}
+
+void deleteFromDList(struct DNODE* HEAD)
+{
+	struct DNODE *node = HEAD;
+
+	if(node == NULL)
+	{
+		printf("Invalid NODE\n");
+	}
+
+	if(node->next == NULL)
+	{
+		printf("No elements left in List\n");
+		return;
+	}
+	while(node->next->next != NULL) {
+		node = node->next;
+	}
+	free(node->next);
+	node->next = NULL;
+}
+
+void deleteFromDListAtPosition(struct DNODE* HEAD, int pos)
+{
+	struct DNODE *node = HEAD;
+	int count = 0;
+
+	if(node == NULL)
+	{
+		printf("Invalid NODE\n");
+	}
+
+	if(pos < 0)
+	{
+		printf("Invalid Position\n");
+		return;
+	}
+
+	while(node->next != NULL) {
+		if(count == pos)
+			break;
+		count++;
+		node = node->next;
+	}
+	if(count < pos)
+	{
+		printf("Invalid Position\n");
+		return;
+	}
+
+	node->prev->next = node->next;
+    node->next->prev = node->prev;
+	free(node);
+}
+
+void addToDListAtPosition(struct DNODE* HEAD, int pos, int data)
+{
+	struct DNODE *node = HEAD, *nnode;
+	int count = 0;
+
+	if(node == NULL)
+	{
+		printf("Invalid NODE\n");
+	}
+
+	if(pos < 0)
+	{
+		printf("Invalid Position\n");
+		return;
+	}
+
+	while(node->next != NULL) {
+		if(count == pos)
+			break;
+		count++;
+		node = node->next;
+	}
+
+	if((count) < pos)
+	{
+		printf("Invalid Position\n");
+		return;
+	}
+
+	nnode = (struct DNODE*)malloc(sizeof(struct DNODE));
+	nnode->next = node;
+    nnode->prev = node->prev;
+    node->prev->next = nnode;
+    node->prev = nnode;
+	nnode->data = data;
+}
+
+void modifyDListAtPosition(struct DNODE* HEAD, int pos, int data)
+{
+	struct DNODE *node = HEAD;
+	int count = 0;
+
+	if(node == NULL)
+	{
+		printf("Invalid NODE\n");
+	}
+
+	if(pos < 0)
+	{
+		printf("Invalid Position\n");
+		return;
+	}
+
+	while(node->next != NULL) {
+		if(count == pos)
+			break;
+		count++;
+		node = node->next;
+	}
+
+	if(count < pos)
+	{
+		printf("Invalid Position\n");
+		return;
+	}
+	node->data = data;
+}
+
+struct DNODE* initializeDList()
+{
+  struct DNODE* HEAD = NULL;
+  HEAD = (struct DNODE*)malloc(sizeof(struct DNODE));
+  if (HEAD == NULL)
+    {
+      printf("Unable to initialize List\n");
+    }
+  HEAD->next = NULL;
+  HEAD->prev = NULL;
+  return HEAD;
+}

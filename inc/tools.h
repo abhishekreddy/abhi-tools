@@ -22,8 +22,14 @@
 #define MYSIZE(X) ((X*)0+1)
 
 struct NODE {
-	int data;
-	struct NODE *next;
+  int data;
+  struct NODE *next;
+};
+
+struct DNODE {
+  int data;
+  struct DNODE *next;
+  struct DNODE *prev;
 };
 
 void insertToArray(int* arr, int data, int pos, int size);
@@ -37,7 +43,16 @@ void addToListAtPosition(struct NODE* HEAD, int pos, int data);
 void displayList(struct NODE* HEAD);
 void displayListAtPosition(struct NODE* HEAD, int pos);
 void deleteFromList(struct NODE* HEAD);
-void deleteFromGivenAtPosition(struct NODE* HEAD, int pos);
+void deleteFromListAtPosition(struct NODE* HEAD, int pos);
 void modifyListAtPosition(struct NODE* HEAD, int pos, int data);
 
+//Double Linked List Functions
+struct DNODE* initializeDList();
+void addToDList(struct DNODE* HEAD, int data);
+void addToDListAtPosition(struct DNODE* HEAD, int pos, int data);
+void displayDList(struct DNODE* HEAD);
+void displayDListAtPosition(struct DNODE* HEAD, int pos);
+void deleteFromDList(struct DNODE* HEAD);
+void deleteFromDListAtPosition(struct DNODE *HEAD, int pos);
+void modifyDListAtPosition(struct DNODE* HEAD, int pos, int data);
 #endif // _TOOLS_H
