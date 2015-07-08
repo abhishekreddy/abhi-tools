@@ -21,6 +21,14 @@
 
 #define MYSIZE(X) ((X*)0+1)
 
+#ifdef DEBUG_MODE
+#define TOOL_ERR(fmt, args...)  printf(fmt, ##args)
+#define TOOL_DBG(fmt, args...)  printf(fmt, ##args)
+#else
+#define TOOL_ERR(fmt, args...)  printf(fmt, ##args)
+#define TOOL_DBG(fmt, args...) do {} while (0)
+#endif
+
 struct NODE {
   int data;
   struct NODE *next;
@@ -31,6 +39,16 @@ struct DNODE {
   struct DNODE *next;
   struct DNODE *prev;
 };
+
+typedef enum {
+  SELECTION_SORT,
+  INSERTION_SORT,
+  BUBBLE_SORT,
+  MERGE_SORT,
+  HEAP_SORT,
+  QUICK_SORT,
+  MAX_SORT
+}sort_type_t;
 
 void insertToArray(int* arr, int data, int pos, int size);
 void insertion_sort(int* a, int size);
@@ -55,4 +73,6 @@ void displayDListAtPosition(struct DNODE* HEAD, int pos);
 void deleteFromDList(struct DNODE* HEAD);
 void deleteFromDListAtPosition(struct DNODE *HEAD, int pos);
 void modifyDListAtPosition(struct DNODE* HEAD, int pos, int data);
+
+void sort_list(struct NODE* head, sort_type_t type);
 #endif // _TOOLS_H
