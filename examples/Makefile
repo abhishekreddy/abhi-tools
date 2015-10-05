@@ -1,11 +1,11 @@
 CC=gcc
 CFLAGS=-c -Wall -I./../inc/
 LDFLAGS=
-SOURCES=example.c
+SOURCES=stringex.c
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=test
 LIBS=-L../out/ -labhitools
-
+OBJDIR=./out
 all: $(SOURCES) $(EXECUTABLE)
 	
 $(EXECUTABLE): $(OBJECTS) 

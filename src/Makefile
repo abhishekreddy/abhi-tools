@@ -1,10 +1,11 @@
 CC=gcc
 CFLAGS=-c -Wall -I./../inc/ -fPIC -g
 LDFLAGS=-shared
-SOURCES=tools.c
+SOURCES=tools.c \
+		stringsupport.c
 OBJECTS=$(SOURCES:.c=.o)
 TARGET=libabhitools.so
-OBJDIR=../out
+OBJDIR=./../out
 OBJ=$(addprefix $(OBJDIR)/, $(patsubst %.c, %.o, $(wildcard *.c)))
 
 .PHONY: all clean

@@ -26,7 +26,7 @@ int main()
   //return 0;
   struct NODE* llist = NULL;
   llist = initializeList();
-  int choice = 0, data = 0, pos = 0, type = 0;
+  int choice = 0, data = 0, pos = 0, type = 0, res = 0;
   while(1) {
     printf("Please choose the operation do you want to do on list\n");
     printf("1. ADD\n");
@@ -37,7 +37,8 @@ int main()
     printf("6. MODIFY AT GIVEN POSITION\n");
     printf("7. DISPLAY AT GIVEN POSITION\n");
     printf("8: SORT\n");
-    printf("9. QUIT\n");
+    printf("9: Find the Middle one\n");
+    printf("10. QUIT\n");
     scanf("%d", &choice);
     switch(choice) {
       case 1:
@@ -89,6 +90,11 @@ int main()
         displayList(llist);
       break;
       case 9:
+        displayList(llist);
+        res = findTheMiddle(llist);
+        printf("%s: Result %d\n", __func__, res);
+        break;
+      case 10:
         return 0;
       case 3:
       default:
