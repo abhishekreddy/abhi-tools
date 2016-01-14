@@ -23,10 +23,13 @@
 #define MAX_NUM_CHARS 256
 
 
-void sort_string(char* str, sort_type_t type);
-int str_len(char* str);
-int check_if_polindrome(char *str, int len);
-void find_all_subpolindromes(char *str);
-void get_max_occur_char(char* str, char* max);
-int check_if_isomorphic(char* str1, char* str2);
+void sort_string(unsigned char* str, sort_type_t type);
+int str_len(unsigned char* str);
+int check_if_polindrome(unsigned char *str, int len);
+void find_all_subpolindromes(unsigned char *str);
+void get_max_occur_char(unsigned char* str,unsigned  char* max);
+int check_if_isomorphic(unsigned char* str1, unsigned char* str2);
+int check_if_rotated(unsigned char* str1, unsigned char* str2);
+int check_substring(unsigned char* str1, unsigned char* str2);
+
 #endif //_STRINGSUPPORT_H

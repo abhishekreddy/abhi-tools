@@ -16,8 +16,9 @@
 
 #include <tools.h>
 #include <stringsupport.h>
+#include <string.h>
 
-void swap_char(char* ptr1, char* ptr2)
+void swap_char( unsigned char* ptr1, unsigned char* ptr2)
 {
   char temp;
   temp = *ptr1;
@@ -25,14 +26,14 @@ void swap_char(char* ptr1, char* ptr2)
   *ptr2 = temp;
 }
 
-void sort_string(char* str, sort_type_t type)
+void sort_string(unsigned char* str, sort_type_t type)
 {
-  int i,j, sorted = 0;
-  char *tmp1 = NULL;
-  char *tmp2 = NULL;
-  char *start = NULL;
+  int sorted = 0;
+  unsigned char *tmp1 = NULL;
+  unsigned char *tmp2 = NULL;
+  unsigned char *start = NULL;
 
-  IF_NULL_VOID_RETURN(str);
+  IF_NULL_RETURN_VOID(str);
 
   tmp1 = str;
   tmp2 = str;
@@ -78,9 +79,9 @@ void  max_array(int a[], int num_elements, int *max_idx, int *max)
    }
 }
 
-int str_len(char *str)
+int str_len(unsigned char *str)
 {
-  int len = 0, i;
+  int len = 0;
   if (!str)
     return len;
   while (*str != '\0') {
@@ -91,7 +92,7 @@ int str_len(char *str)
   return len;
 }
 
-int check_if_polindrome(char *str, int len)
+int check_if_polindrome(unsigned char *str, int len)
 {
   int is_polindrome = 1, i = 0;
 
@@ -106,11 +107,11 @@ int check_if_polindrome(char *str, int len)
 }
 
 
-void find_all_subpolindromes(char *str)
+void find_all_subpolindromes(unsigned char *str)
 {
   int i = 0;
   int len;
-  char *fptr, *bptr, *tptr;
+  unsigned char *fptr, *bptr, *tptr;
 
   len = str_len(str);
   fptr = str;
@@ -131,13 +132,99 @@ void find_all_subpolindromes(char *str)
   }
 }
 
-int check_if_isomorphic(char* str1, char* str2)
+unsigned char* str_cat(unsigned char* str1, unsigned char* str2)
+{
+  unsigned char* result = NULL;
+  unsigned int offset = 0;
+
+  IF_NULL_RETURN_NULL(str1);
+  IF_NULL_RETURN_NULL(str2);
+
+  result = (unsigned char*)malloc(
+    sizeof(unsigned char) * (str_len(str1) + str_len(str2)));
+    if (!result) {
+      TOOL_ERR("%s: %d Memory allocation failed\n", __func__, __LINE__);
+      return NULL;
+    }
+  offset = sizeof(unsigned char) * str_len(str1);
+  memcpy(result , str1, offset);
+  memcpy(result + offset, str2, sizeof(unsigned char) * str_len(str2));
+  return result;
+}
+
+int check_substring(unsigned char* str1, unsigned char* str2)
+{
+  int result = -1, i, j = 0;
+  int len1, len2, start_monitor = 1, pos = 0;
+
+  IF_NULL_RETURN_INT(str1);
+  IF_NULL_RETURN_INT(str2);
+
+  len1 = str_len(str1);
+  len2 = str_len(str2);
+
+  if (len1 < len2)
+    return result;
+  for (i =0 ; i < len1; i++) {
+    if (start_monitor) {
+      if (str1[i] != str2[j]) {
+        start_monitor =  j = 0;
+        if (str1[i] == str2[j]) {
+          start_monitor = 1;
+          pos = i;
+          j = 1;
+          TOOL_DBG("%s: Starting position monitor from pos %d  \
+            main string %s substring %s\n", __func__,
+            pos, str1, str2);
+        }
+      } else {
+         j++;
+         if (j == len2) {
+           TOOL_DBG("%s: Found %s in %s at pos %d\n", __func__,
+             str2, str1, pos);
+           result = pos;
+           break;
+         }
+      }
+    } else {
+      if (str1[i] == str2[j])
+         start_monitor = 1;
+         pos = i;
+         j = 1;
+      TOOL_DBG("%s: Starting position monitor from pos %d \
+        main string %s substring %s\n", __func__,
+        pos, str1, str2);
+    }
+  }
+  return  result;
+}
+
+int check_if_rotated(unsigned char* str1, unsigned char* str2)
+{
+  int is_rotated = 1;
+  unsigned char* result = NULL;
+
+  IF_NULL_RETURN_INT(str1);
+  IF_NULL_RETURN_INT(str2);
+  if (str_len(str1) != str_len(str2)) {
+    is_rotated = 0;
+    return is_rotated;
+  }
+  result = str_cat(str1, str2);
+
+  IF_NULL_RETURN_INT(result);
+  if (check_substring(result, str2) == -1)
+    is_rotated = 0;
+  return is_rotated;
+}
+
+int check_if_isomorphic(unsigned char* str1, unsigned char* str2)
 {
   int is_isomorphic = 1;
-  char map_array[MAX_NUM_CHARS];
+  unsigned char map_array[MAX_NUM_CHARS];
   int is_visited[MAX_NUM_CHARS];
   int len, i;
-  memset(map_array, 0, sizeof(char) * MAX_NUM_CHARS);
+  memset(map_array, 0, sizeof(unsigned char) * MAX_NUM_CHARS);
   memset(is_visited, 0, sizeof(int) * MAX_NUM_CHARS);
   len = str_len(str1);
   if (len != str_len(str2)) {
@@ -158,16 +245,16 @@ int check_if_isomorphic(char* str1, char* str2)
   TOOL_DBG("%s: Isomorphic %d\n", __func__, is_isomorphic);
   return is_isomorphic;
 }
-void get_max_occur_char(char* str, char* max)
+void get_max_occur_char(unsigned char* str,unsigned char* max)
 {
   int max_count = 0 , max_char = 0;;
   int count_char[MAX_NUM_CHARS] = {0};
-  char* tmp;
+  unsigned char* tmp;
 
-  IF_NULL_VOID_RETURN(str);
-  IF_NULL_VOID_RETURN(max);
+  IF_NULL_RETURN_VOID(str);
+  IF_NULL_RETURN_VOID(max);
 
-  tmp = str;
+  tmp = (unsigned char*)str;
   while (*tmp != '\0') {
     count_char[*tmp]++;
     tmp++;

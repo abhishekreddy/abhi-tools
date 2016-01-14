@@ -21,10 +21,12 @@
 
 #define MYSIZE(X) ((X*)0+1)
 
-#define IF_NULL_VOID_RETURN(ptr) if (!ptr) return;
-#define IF_NULL_INT_RETURN(ptr)  if (!ptr) return -1;
-#define IF_NULL_BOOL_RETURN(ptr) if (!ptr) return false;
+#define IF_NULL_RETURN_VOID(ptr) if (!ptr) return;
+#define IF_NULL_RETURN_INT(ptr)  if (!ptr) return -1;
+#define IF_NULL_RETURN_BOOL(ptr) if (!ptr) return false;
 #define IF_NULL(ptr)  if (!ptr)
+#define IF_NULL_RETURN_NULL(ptr) if (!ptr) return NULL;
+
 #ifdef DEBUG_MODE
 #define TOOL_ERR(fmt, args...)  printf(fmt, ##args)
 #define TOOL_DBG(fmt, args...)  printf(fmt, ##args)
