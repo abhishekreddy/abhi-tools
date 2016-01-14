@@ -21,6 +21,10 @@
 
 #define MYSIZE(X) ((X*)0+1)
 
+#define IF_NULL_VOID_RETURN(ptr) if (!ptr) return;
+#define IF_NULL_INT_RETURN(ptr)  if (!ptr) return -1;
+#define IF_NULL_BOOL_RETURN(ptr) if (!ptr) return false;
+#define IF_NULL(ptr)  if (!ptr)
 #ifdef DEBUG_MODE
 #define TOOL_ERR(fmt, args...)  printf(fmt, ##args)
 #define TOOL_DBG(fmt, args...)  printf(fmt, ##args)
@@ -75,4 +79,5 @@ void deleteFromDListAtPosition(struct DNODE *HEAD, int pos);
 void modifyDListAtPosition(struct DNODE* HEAD, int pos, int data);
 
 void sort_list(struct NODE* head, sort_type_t type);
+void swap(void** ptr1, void** ptr2);
 #endif // _TOOLS_H

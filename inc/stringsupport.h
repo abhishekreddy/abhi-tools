@@ -20,6 +20,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define MAX_NUM_CHARS 256
+
+
+void sort_string(char* str, sort_type_t type);
 int str_len(char* str);
 int check_if_polindrome(char *str, int len);
+void find_all_subpolindromes(char *str);
+void get_max_occur_char(char* str, char* max);
+int check_if_isomorphic(char* str1, char* str2);
 #endif //_STRINGSUPPORT_H

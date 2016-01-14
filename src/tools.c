@@ -16,6 +16,14 @@
 
 #include <tools.h>
 
+void swap(void **ptr1, void **ptr2)
+{
+  void *temp;
+  temp = *ptr1;
+  *ptr1 = *ptr2;
+  *ptr2 = temp;
+  return;
+}
 void insertToArray(int* arr, int data, int pos, int size)
 {
   int count, tmp;

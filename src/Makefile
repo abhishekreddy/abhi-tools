@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-c -Wall -I./../inc/ -fPIC -g
+CFLAGS=-c -Wall -I./../inc/ -fPIC -g -DDEBUG_MODE -ggdb
 LDFLAGS=-shared
 SOURCES=tools.c \
 		stringsupport.c
