@@ -199,6 +199,20 @@ int check_substring(unsigned char* str1, unsigned char* str2)
   return  result;
 }
 
+void string_reverse(unsigned char* str, int pos, int len)
+{
+   unsigned char temp;
+
+   IF_NULL_RETURN_VOID(str);
+
+   if (pos < (len/2)) {
+     string_reverse(str, pos+1, len);
+     temp = str[pos];
+     str[pos] = str[(len-1) - pos];
+     str[(len-1) - pos] = temp;
+   }
+}
+
 int check_if_rotated(unsigned char* str1, unsigned char* str2)
 {
   int is_rotated = 1;
