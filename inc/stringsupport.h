@@ -31,5 +31,5 @@ void get_max_occur_char(unsigned char* str,unsigned  char* max);
 int check_if_isomorphic(unsigned char* str1, unsigned char* str2);
 int check_if_rotated(unsigned char* str1, unsigned char* str2);
 int check_substring(unsigned char* str1, unsigned char* str2);
-
+void string_reverse(unsigned char* str, int pos, int len);
 #endif //_STRINGSUPPORT_H
